@@ -1,0 +1,6 @@
+*.png
+*.pyc
+*.archlinux*
+*.pth
+*.ckpt
+*.onnx
