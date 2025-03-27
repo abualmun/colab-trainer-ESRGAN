@@ -15,7 +15,7 @@ class DataModule(pl.LightningDataModule):
         val_lr: str = "./",
         val_hr: str = "./",
         batch_size: int = 5,
-        num_workers: int = 2,
+        num_workers: int = 12,
         HR_size=256,
         scale=4,
         mask_dir: str = "./",
