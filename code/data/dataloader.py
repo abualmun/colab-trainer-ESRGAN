@@ -15,7 +15,7 @@ class DataModule(pl.LightningDataModule):
         val_lr: str = "./",
         val_hr: str = "./",
         batch_size: int = 5,
-        num_workers: int = 2,
+        num_workers: int = 12,
         HR_size=256,
         scale=4,
         mask_dir: str = "./",
@@ -49,11 +49,14 @@ class DataModule(pl.LightningDataModule):
         if cfg["datasets"]["train"]["mode"] == "DS_lrhr":
             from .data import DS_lrhr, DS_lrhr_val
 
-            self.dataset_train = DS_lrhr(
-                self.dir_lr, self.dir_hr, self.HR_size, self.scale
-            )
+            self.dataset_train = DS_lrhr(self.dir_lr, self.dir_hr, self.HR_size, self.scale)
             self.dataset_validation = DS_lrhr_val(self.val_lr, self.val_hr)
             self.dataset_test = DS_lrhr_val(self.val_lr, self.val_hr)
+
+            # # # Debugging
+            print(f"Training Dataset Size: {len(self.dataset_train)}")
+            print(f"Validation Dataset Size: {len(self.dataset_validation)}")
+            print(f"Test Dataset Size: {len(self.dataset_test)}")
 
         elif cfg["datasets"]["train"]["mode"] == "DS_inpaint":
             # root, transform=None, size=256):
